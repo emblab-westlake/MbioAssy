@@ -1,3 +1,4 @@
+## MbioAssy1.0
 ### This folder contains R scripts for microbial community assembly analyses, including NST calculation, neutral model analysis, C-score variance analysis and co-occurrence network analysis.
 input includes a) abundance table of microbial entities (e.g., OTUs, ASVs), each row is a sample, each column is an OTU.
                b) a one-column matrix indicating the group of each sample (only used in NST calculation)
