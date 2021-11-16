@@ -30,7 +30,7 @@ Reference to cite:
 
 
 ### 4_Co-occurrence_network.R
-This script first defines the function "co_occurrence_network" to generate a filtered gml-formatted network file based on all pairwise Spearman's correlations and FDR-adjusted P-value calculation and filtration, and then uses input abundance table to generate co-occurrence network which can be visulized in Gephi (https://gephi.org/) and calculate network topological properties.
+This script first defines the function "co_occurrence_network" to generate a filtered gml-formatted network file based on all pairwise Spearman's correlations and FDR-adjusted P-value calculation and filtration, and then uses input abundance table to generate co-occurrence network which can be further visulized and explored in Gephi (https://gephi.org/) or Cytoscape (https://cytoscape.org/).
 
 Reference to cite:
 1. Ju F, Zhang T. 2015. Bacterial assembly and temporal dynamics in activated sludge of a full-scale municipal wastewater treatment plant. The ISME Journal. 9: 683-695
