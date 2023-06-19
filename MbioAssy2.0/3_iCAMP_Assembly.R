@@ -1,14 +1,18 @@
+###@email zhaoze@westlake.edu.cn
 
 # Scripts for iCAMP null model analysis for community assembly
 # Modified from github: https://github.com/DaliangNing/iCAMP1
-# Authors: Ze Zhao (zhaoze@westlake.edu.cn)
-# Date: 20220908
-# Update: 20230117
+# If you are dealing with a large dataset (e.g., > 20000 taxa), a serve with enough CPU threads (e.g., >20) is preferred to finish the calculation in reasonable time.
 
 
 # 1 # set folder paths and file names, please change according to the folder paths and file names in your computer.
-# the folder saving the input files
-wd="/storage/jufengLab/zhaoze/Other_project/yunhuazhang/icamp_analysis_20230111/Data"
+
+# create a folder for the iCAMP analysis
+dir.create('D:/MbioAssy/iCAMP_analysis')
+
+# create a subfolder and put all input files in that folder
+dir.create('D:/MbioAssy/iCAMP_analysis/Data')
+setwd('D:/MbioAssy/iCAMP_analysis/Data')
 
 # the OTU table file (Tab delimited txt file)
 com.file="table.txt"
@@ -23,14 +27,20 @@ treat.file="metadata.txt"
 env.file="environment.txt"
 
 # the classification (taxonomy) information
-clas.file="taxonmy1.txt"
+clas.file="taxonmy.txt"
+
+
+# create a subfolder to save the output files
+save.wd="D:/MbioAssy/iCAMP_analysis/Output"
+if(!dir.exists(save.wd)){dir.create(save.wd)}
 
 
 # 2 # key parameter setting
 prefix="Soil"  # prefix of the output file names. usually use a project ID.
 rand.time=1000  # randomization time, 1000 is usually enough. For example test, you may set as 100 or less to save time.
 nworker=60 # nworker is thread number for parallel computing, which depends on the CPU core number of your computer.
-memory.G=490 # to set the memory size as you need (but should be less than the available space in your hard disk), so that calculation of large tree will not be limited by physical memory. unit is Gb.
+memory.G=500 # to set the memory size as you need (but should be less than the available space in your hard disk), so that calculation of large tree will not be limited by physical memory. unit is Gb.
+
 
 # 3 # load R packages and data
 library(iCAMP)
@@ -52,13 +62,6 @@ clas=read.table(clas.file, header = TRUE, sep = "\t", row.names = 1,
                 as.is = TRUE, stringsAsFactors = FALSE, comment.char = "",
                 check.names = FALSE)
 
-
-
-
-# the folder to save the output. please change to a new folder even if you are just testing the example data.
-save.wd="/storage/jufengLab/zhaoze/Other_project/yunhuazhang/icamp_analysis_20230111/Output"
-if(!dir.exists(save.wd)){dir.create(save.wd)}
-if(!dir.exists(paste0(save.wd,'/backup_files'))){dir.create(paste0(save.wd,'/backup_files'))}
 
 # 4 # match sample IDs in OTU table and treatment information table
 # sampid.check=match.name(rn.list=list(comm=comm,treat=treat,env=env))
@@ -199,109 +202,9 @@ write.csv(icbin$Bin.TopClass,file = paste0(prefix,".Bin_TopTaxon.csv"),row.names
 #保存不同treat的对象 不同的treat在前面定义了
 save(icbin, file=paste0(prefix,".icbin.RDada"))
 
-#不同treat的分析结果保存在不同的文件夹中Step10_treat6, Step10_treat3, Step10_treat7
 
 
-# 11 # Bootstrapping test
-# please specify which column in the treatment information table.
-i=1
-treat.use=treat[,i,drop=FALSE]
-icamp.result=icres$CbMPDiCBraya
-icboot=iCAMP::icamp.boot(icamp.result = icamp.result,treat = treat.use,rand.time = rand.time,
-                         compare = TRUE,silent = FALSE,between.group = TRUE,ST.estimation = TRUE)
-                         
-save(icboot,file=paste0(prefix,".iCAMP.Boot.",colnames(treat)[i],".rda"))
-write.csv(icboot$summary,file = paste0(prefix,".iCAMP.BootSummary.",colnames(treat)[i],".csv"),row.names = FALSE)
-write.csv(icboot$compare,file = paste0(prefix,".iCAMP.Compare.",colnames(treat)[i],".csv"),row.names = FALSE)
 
-# output files:
-# Test.iCAMP.Boot.Management.rda: the object "icboot" saved in R data format. see help document of the function icamp.boot for description of each element in the object.
-# Test.BootSummary.Management.csv: a table to summarize bootstrapping results. see help document of the function icamp.boot for description of the output element "summary".
-# Test.Compare.Management.csv: a table to summarize comparison index, effect size, and significance between each two groups. see help document of the function icamp.boot for description of the output element "compare".
-
-# 12 # Other approach: QPEN (quantifying community assembly processes based on entire-community null model analysis)
-# 12.1 # QPEN calculation
-qpout=iCAMP::qpen(comm=comm,pd=pd.big$pd.file,pd.big.wd=pd.big$pd.wd,
-                  pd.big.spname=pd.big$tip.label,ab.weight=TRUE,
-                  rand.time=rand.time, nworker=nworker,project=prefix,
-                  wd=save.wd, save.bNTIRC=TRUE)
-save(qpout,file=paste0(prefix,".QPEA.qpout.",colnames(treat)[i],".RData"))
-
-# 12.2 # significance test
-qptest=qpen.test(qpen.result = qpout,treat = treat,rand.time = rand.time,
-                 between.group = TRUE,out.detail=TRUE,silent=FALSE)
-
-write.csv(qptest$obs.summary,file = paste0(prefix,".QPEN.Index.Obs.Summary.csv"),row.names = FALSE)
-write.csv(qptest$boot.summary,file = paste0(prefix,".QPEN.Bootstrapping.Summary.csv"),row.names = FALSE)
-write.csv(qptest$compare,file = paste0(prefix,".QPEN.Comparison.Summary.csv"),row.names = FALSE)
-save(qptest,file = paste0(prefix,".QPEN.bootstrap.rda"))
-
-# 13 # Other approach: Neutral taxa percentage
-snmout=iCAMP::snm.comm(comm = comm, treat = treat, 
-                       rand=rand.time, alpha=0.05)
-save(snmout,file=paste0(prefix,".NeturalModel.snmout.",colnames(treat)[i],".RData"))
-
-write.csv(snmout$stats,file = paste0(prefix,".NeutralModel.Stats.csv"))
-write.csv(snmout$ratio.summary,file = paste0(prefix,".NeutralModel.TypeRatio.csv"))
-
-# 14 # Other approach: tNST and pNST (taxonomic and phylogenetic normalized stochasticity ratio)
-# need to install package NST if not yet
-if(!("NST" %in% installed.packages()[,"Package"])){install.packages("NST")}
-library(NST)
-i=1
-treat.use=treat[,i,drop=FALSE]
-
-# 14.1a # tNST
-tnstout=NST::tNST(comm=comm, group=treat.use, dist.method="bray", 
-                  abundance.weighted=TRUE, rand=rand.time,  
-                  nworker=nworker, null.model="PF", output.rand = TRUE,
-                  SES = TRUE, RC = TRUE)
-write.csv(tnstout$index.grp,file = paste0(prefix,".tNST.summary.",colnames(treat)[i],".csv"))
-write.csv(tnstout$index.pair.grp,file = paste0(prefix,".tNST.pairwise.",colnames(treat)[i],".csv"))
-
-# 14.1b # bootstrapping test for tNST
-tnst.bt=NST::nst.boot(nst.result=tnstout, group=treat.use,
-                      rand=rand.time, nworker=nworker)
-write.csv(tnst.bt$NST.summary,file = paste0(prefix,".tNST.bootstr.",colnames(treat)[i],".csv"))
-write.csv(tnst.bt$NST.compare,file = paste0(prefix,".tNST.compare.",colnames(treat)[i],".csv"))
-
-# 14.2a # pNST
-pnstout=NST::pNST(comm=comm, pd.desc=pd.big$pd.file, pd.wd=pd.big$pd.wd, 
-                  pd.spname=pd.big$tip.label, group=treat.use, abundance.weighted=TRUE,
-                  rand=rand.time, phylo.shuffle=TRUE, nworker=nworker,
-                  output.rand = TRUE, SES=FALSE, RC=FALSE)
-write.csv(pnstout$index.grp,file = paste0(prefix,".pNST.summary.",colnames(treat)[i],".csv"))
-write.csv(pnstout$index.pair.grp,file = paste0(prefix,".pNST.pairwise.",colnames(treat)[i],".csv"))
-
-pnst.bt=NST::nst.boot(nst.result=pnstout, group=treat.use,
-                      rand=rand.time, nworker=nworker)
-write.csv(pnst.bt$NST.summary,file = paste0(prefix,".pNST.bootstr.",colnames(treat)[i],".csv"))
-write.csv(pnst.bt$NST.compare,file = paste0(prefix,".pNST.compare.",colnames(treat)[i],".csv"))
-
-# 15 # summarize core, rare, and other taxa
-# 15.1 # define the types of different taxa in category.txt
-setwd(wd)
-cate.file="category.txt"
-cate=read.table(cate.file, header = TRUE, sep = "\t", row.names = 1,
-                as.is = TRUE, stringsAsFactors = FALSE, comment.char = "",
-                check.names = FALSE)
-cate=cate[which(rownames(cate) %in% colnames(comm)),,drop=FALSE] # remove unmatched taxa.
-setwd(save.wd)
-
-# 15.2
-iccate=icamp.cate(icamp.bins.result = icbin,comm = comm,cate = cate,
-                  treat = treat, silent = FALSE,between.group = TRUE)
-write.csv(iccate$Ptuvx,file = paste0(prefix,".iCAMP.Process_EachTurnover_EachCategory.csv"))
-write.csv(iccate$Ptx,file = paste0(prefix,".iCAMP.Process_EachGroup_EachCategory.csv"))
-
-(t=format(Sys.time()-t0)) # to calculate time cost
-# End #
-
-
-# 保存工作项目 ------------------------------------------------------------------
-
-setwd(Output.wd)
-save.image(file="iCAMP.project.RData")
 
 
 

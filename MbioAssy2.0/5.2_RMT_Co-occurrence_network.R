@@ -1,5 +1,5 @@
-###@email yuanling@westlake.edu.cn
-###update: zezhao, 20211209, add the function of using RMT theory to find the optimized correlation threshold
+###@email zhaoze@westlake.edu.cn
+###update: add the function of using RMT theory to find the optimized correlation threshold
 
 # input includes abundance table of microbial entities (e.g., OTUs, ASVs),
 # each row is a sample, each column is an OTU
@@ -11,7 +11,7 @@ table <- table[which(rowSums(table) > 0),]
 table <- table[,which(colSums(table) > 0)]
 
 
-# 4
+# 5.2
 # Co-occurrence network construction
 # Reference:Ju F, Xia Y, Guo F, Wang ZP, Zhang T. 2014. 
 # Taxonomic relatedness shapes bacterial assembly in activated sludge of 
@@ -33,7 +33,7 @@ library(RMThreshold)
 # define function co_occurrence_network
 # to construct co-occurrence network
 co_occurrence_network <- 
-  function(matrix, cor.cutoff = NULL, p.cutoff, use_RMT = FALSE){
+  function(matrix, p.cutoff){
   
   # correlation analysis based on spearman's co-efficient
   matrix.dist<-rcorr(t(matrix),type="spearman")
@@ -41,15 +41,7 @@ co_occurrence_network <-
   matrix.cor.p<-matrix.dist$P
   
   # using RMT theory to find the optimized correlation threshold or not
-  if (isFALSE(use_RMT)){
-    if (is.null(cor.cutoff)) {
-      print('Please set nunmber of cor.cutoff')
-    } else {
-      cor.cutoff
-    }
-  } else if (isTRUE(use_RMT)) {
-    cor.cutoff <- RMT_cutoff(matrix.cor)
-  }
+  cor.cutoff <- RMT_cutoff(matrix.cor)
   
   #Multiple testing correction using Benjamini-Hochberg standard false discovery rate correction ("FDR-BH")
   matrix.cor.p <- p.adjust(matrix.cor.p, method="BH")
@@ -79,7 +71,7 @@ co_occurrence_network <-
   result$cor.cutoff <- cor.cutoff
   
   return(result)
-  }
+}
 
 # define function RMT_cutoff
 # using RMT theory to find the optimized correlation threshold
@@ -101,7 +93,7 @@ RMT_cutoff <- function(matrix.cor){
     if (isTRUE(RMT.cutoff.round<RMT.cutoff)) {
       RMT.cutoff.round <- RMT.cutoff.round + 0.01
     }
-    # cor.cutoff <- RMT.cutoff.round
+    return(RMT.cutoff.round)
   }
 
 
@@ -147,29 +139,3 @@ node.transitivity <- transitivity(g, type = c("local"), vids = NULL,
                                   weights = NA)
 node.topology <- data.frame(node.degree, betweenness.centrality, closeness.centrality, node.transitivity)
 write.csv(node.topology, file="Network.node.topology.csv")
-
-
-
-
-
-## 备份
-if (isTRUE(use_RMThreshold)) {
-  
-  res <-
-    rm.get.threshold(matrix.cor, interactive = F,dist.method = 'LL',
-                     plot.comp = F, save.fit = F, plot.spacing = F,
-                     interval = c(0.6,0.99))
-  ## click "ESC" on the keyboard twice, this will not affect the following analysis
-  if (max(res$p.ks > 0.05)) {
-    pks.id <- which(res$p.ks >= 0.05)[1]
-  } else {
-    pks.id <- which.max(res$p.ks)
-  }
-  
-  RMT.cutoff <- res$tested.thresholds[pks.id]
-  RMT.cutoff.round <- round(RMT.cutoff, 2)
-  if (isTRUE(RMT.cutoff.round<RMT.cutoff)) {
-    RMT.cutoff.round <- RMT.cutoff.round + 0.01
-  }
-  cor.cutoff <<- RMT.cutoff.round
-}
