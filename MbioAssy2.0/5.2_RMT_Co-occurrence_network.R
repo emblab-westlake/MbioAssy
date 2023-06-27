@@ -3,16 +3,15 @@
 
 # input includes abundance table of microbial entities (e.g., OTUs, ASVs),
 # each row is a sample, each column is an OTU
-table = read.table('example_input/AMB.txt',sep = '\t',header = T)
-rownames(table) = table[,1]
-table = table[,-1]
+table = read.table(
+  'example_input/OTU.txt',sep = '\t',header = T,row.names = 1)
 table <- as.matrix(table)
 table <- table[which(rowSums(table) > 0),]
 table <- table[,which(colSums(table) > 0)]
 
 
 # 5.2
-# Co-occurrence network construction
+# RMT-based Co-occurrence network construction
 # Reference:Ju F, Xia Y, Guo F, Wang ZP, Zhang T. 2014. 
 # Taxonomic relatedness shapes bacterial assembly in activated sludge of 
 # globally distributed wastewater treatment plants. Environmental Microbiology. 16(8):2421-2432
@@ -101,15 +100,14 @@ RMT_cutoff <- function(matrix.cor){
 # Construct co-occurrence network using defined function co_occurrence_network and output results
 # Creating gml files of network (to be visulized in Gephi or Cytoscape)
 
+
 ## Notice: when the figure appears in Plots window, please click "ESC" on the keyboard twice. This will not affect the following analysis ##
-pattern <- co_occurrence_network(matrix = t(table),
-                                 cor.cutoff = NULL,
-                                 p.cutoff = 0.05,
-                                 use_RMT = T)  # cutoffs for correlation coefficient and P-value
+pattern <- co_occurrence_network(
+  matrix = table, p.cutoff = 0.05)  # cutoffs for correlation coefficient and P-value
 pattern$cor.cutoff
 View(pattern$matrix.cor1)
 
-write.graph(pattern$graph1,'AMB.Network.gml',format='gml')    #network file for positive association
+write.graph(pattern$graph1,'Network.gml',format='gml')    #network file for positive association
 
 # Calculating network topological properties
 g<-pattern$graph1   ###positive network

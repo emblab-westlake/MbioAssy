@@ -1,9 +1,8 @@
 ###@email yuanling@westlake.edu.cn
 # input includes abundance table of microbial entities (e.g., OTUs, ASVs),
 # each row is a sample, each column is an OTU
-table = read.table('example_input/AMB.txt',sep = '\t',header = T)
-rownames(table) = table[,1]
-table = table[,-1]
+table = t(read.table(
+  'example_input/OTU.txt',sep = '\t',header = T, row.names = 1))
 table <- as.matrix(table)
 table <- table[which(rowSums(table) > 0),]
 table <- table[,which(colSums(table) > 0)]
@@ -30,9 +29,18 @@ table01.nonzerorow <- table01[which(rowSums(table01) > 0),]
 table01 <- table01.nonzerorow
 
 # C-score-var calculation  
-csvarModel <- cooc_null_model(table01, algo = "sim9", metric = "c_score_var",
-                              nReps = 500, saveSeed = FALSE, burn_in = 500, algoOpts = list(),
-                              metricOpts = list(), suppressProg = FALSE)
+csvarModel <-
+  cooc_null_model(
+    table01,
+    algo = "sim9",
+    metric = "c_score_var",
+    nReps = 500,
+    saveSeed = FALSE,
+    burn_in = 500,
+    algoOpts = list(),
+    metricOpts = list(),
+    suppressProg = FALSE
+  )
 # for argument 'nReps', 30000 is recommended; here set nReps = 500 to save test time
 
 # output results

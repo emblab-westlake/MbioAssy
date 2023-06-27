@@ -1,9 +1,8 @@
 ###@email yuanling@westlake.edu.cn
 # input includes abundance table of microbial entities (e.g., OTUs, ASVs),
 # each row is a sample, each column is an OTU
-table = read.table('example_input/AMB.txt',sep = '\t',header = T)
-rownames(table) = table[,1]
-table = table[,-1]
+table = t(read.table(
+  'example_input/OTU.txt',sep = '\t',header = T, row.names = 1))
 table <- as.matrix(table)
 table <- table[which(rowSums(table) > 0),]
 table <- table[,which(colSums(table) > 0)]
@@ -22,6 +21,7 @@ if (!requireNamespace("stats4", quietly=TRUE))
 require(minpack.lm)
 require(Hmisc)
 require(stats4)
+require(ggplot2)
 
 # Define function fit_sncm
 # which returns several fitting statistics as well as predicted occurrence frequencies 
@@ -184,8 +184,9 @@ plot_sncm_fit <- function(spp.out, fill = NULL, title = NULL){
 
 # Neutral model analysis and visualization using the example ASV table
 nm.out <- fit_sncm(table)
-p <- plot_sncm_fit(nm.out,title = 'AMB')
+p <- plot_sncm_fit(nm.out,title = 'Test')
 pdf('Neutral.model.plot.pdf',width = 6,height = 4)
 p
 dev.off()
-write.table(nm.out$predictions,file = 'Neutral.model.details.txt',sep = '\t')
+write.table(nm.out$predictions,file = 'Neutral.model.details.txt',sep = '\t',
+            quote = F)

@@ -1,0 +1,21 @@
+"x"
+"1" "C-score-var summary"
+Time Stamp:  Tue Jun 27 15:18:16 2023 
+Reproducible:  
+Number of Replications:  
+Elapsed Time:  18 mins 
+Metric:  c_score_var 
+Algorithm:  sim9 
+Observed Index:  26174 
+Mean Of Simulated Index:  24984 
+Variance Of Simulated Index:  34895 
+Lower 95% (1-tail):  24706 
+Upper 95% (1-tail):  25272 
+Lower 95% (2-tail):  24700 
+Upper 95% (2-tail):  25297 
+Lower-tail P >  0.998 
+Upper-tail P <  0.002 
+Observed metric > 500 simulated metrics 
+Observed metric < 0 simulated metrics 
+Observed metric = 0 simulated metrics 
+Standardized Effect Size (SES):  6.3674 

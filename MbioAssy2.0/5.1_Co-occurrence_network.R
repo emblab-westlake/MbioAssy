@@ -1,9 +1,8 @@
 ###@email yuanling@westlake.edu.cn
 # input includes abundance table of microbial entities (e.g., OTUs, ASVs),
 # each row is a sample, each column is an OTU
-table = read.table('example_input/AMB.txt',sep = '\t',header = T)
-rownames(table) = table[,1]
-table = table[,-1]
+table = read.table(
+  'example_input/OTU.txt',sep = '\t',header = T, row.names = 1)
 table <- as.matrix(table)
 table <- table[which(rowSums(table) > 0),]
 table <- table[,which(colSums(table) > 0)]
@@ -64,8 +63,8 @@ co_occurrence_network<-function(matrix,cor.cutoff,p.cutoff){
 
 # Construct co-occurrence network using defined function co_occurrence_network and output results
 # Creating gml files of network (to be visulized in Gephi or Cytoscape)
-pattern <- co_occurrence_network(t(table),0.8,0.05)  # cutoffs for correlation coefficient and P-value
-write.graph(pattern$graph1,'AMB.Network.gml',format='gml')    #network file for positive association
+pattern <- co_occurrence_network(table,0.8,0.05)  # cutoffs for correlation coefficient and P-value
+write.graph(pattern$graph1,'Network.gml',format='gml')    #network file for positive association
 
 # Calculating network topological properties
 g<-pattern$graph1   ###positive network
