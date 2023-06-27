@@ -37,7 +37,7 @@ Reference to cite:
 This script was modified from (Reference doi: 10.1038/s41467-020-18560-z) and used to quantify relative importance of basic community assembly processes at phylogenetic group ('bin') levels. The results were output as a detailed table which contains the relative importance of the five processes: homogeneous selection, heterogeneous selection, homoginizing dispersal, dispersal limitation, and drift.
 
 Reference to cite:
-1. Zhao Z, Zhang L, Zhang GQ, Gao H, Chen XG, Li L, Ju F. 2023. Hydrodynamic and anthropogenic disturbances co-shape microbiota rhythmicity and community assembly within intertidal groundwater-surface water continuum. Water Research, 120236.
+1. Zhao Z, Zhang L, Zhang GQ, Gao H, Chen XG, Li L, Ju F. 2023. Hydrodynamic and anthropogenic disturbances co-shape microbiota rhythmicity and community assembly within intertidal groundwater-surface water continuum. Water Research, 120236. https://doi.org/10.1016/j.watres.2023.120236
 2. Ning, D., Yuan, M., Wu, L. et al. A quantitative framework reveals ecological drivers of grassland microbial community assembly in response to warming. Nat Commun 11, 4717 (2020). https://doi.org/10.1038/s41467-020-18560-z
 
 ### 4_C-score-var.R
@@ -58,7 +58,7 @@ Reference to cite:
 Based on the '5.1_Co-occurrence_network.R' script, this script adds the function to find the optimized correlation threshold instead of the 'cut-off' value based on the RMT theory.
 
 Reference to cite:
-1. Zhao Z, Zhang L, Zhang GQ, Gao H, Chen XG, Li L, Ju F. 2023. Hydrodynamic and anthropogenic disturbances co-shape microbiota rhythmicity and community assembly within intertidal groundwater-surface water continuum. Water Research, 120236.
+1. Zhao Z, Zhang L, Zhang GQ, Gao H, Chen XG, Li L, Ju F. 2023. Hydrodynamic and anthropogenic disturbances co-shape microbiota rhythmicity and community assembly within intertidal groundwater-surface water continuum. Water Research, 120236. https://doi.org/10.1016/j.watres.2023.120236
 2. Ju F, Zhang T. 2015. Bacterial assembly and temporal dynamics in activated sludge of a full-scale municipal wastewater treatment plant. The ISME Journal. 9: 683-695
 3. Ju F, Xia Y, Guo F, Wang ZP, Zhang T*.2014. Taxonomic relatedness shapes bacterial assembly in activated sludge ofglobally distributed wastewater treatment plants. Environmental Microbiology.16(8):2421-2432
 
