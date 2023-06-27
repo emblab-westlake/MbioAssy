@@ -5,7 +5,7 @@ The MbioAssy2.0 adds two function modules based on MbioAssy1.0:
 * 3_iCAMP.R: quantify relative importance of basic community assembly processes at phylogenetic group level.
 * 5.2_RMT_Co-occurrence_network.R: add the function to find the optimized correlation threshold instead of the 'cut-off' value based on the RMT theory.  
 
-The document was updated by Ze Zhao on June 27 2023  
+The document was updated by Ze Zhao on June 27 2023.  
 Reference: Zhao, Z., et al. (2023) Hydrodynamic and anthropogenic disturbances co-shape microbiota rhythmicity and community assembly within intertidal groundwater-surface water continuum. Water Research, 120236.  
 
 ### This folder contains R scripts for microbial community assembly analyses, including NST calculation, neutral model analysis, iCAMP null model analysis, C-score variance analysis, co-occurrence network analysis, and generation of random newtorks.
