@@ -28,8 +28,10 @@ com.file <- "OTU.txt"
 # the phylogenetic tree file
 tree.file <- "Tree.nwk"
 
-# the treatment informaiton table
+# the treatment informaiton table (grouping information)
+# treatment table contains one or multi columns of group information
 treat.file <- "Group.txt"
+
 
 # the environmental varialbes
 env.file <- "Env.txt"

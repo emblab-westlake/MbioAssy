@@ -1,91 +1,91 @@
-SampleID	Group	Type	Saline
-S1	IW	NE	Non-saline soil
-S2	IW	NE	Non-saline soil
-S3	IW	NE	Non-saline soil
-S4	IW	NE	Non-saline soil
-S5	IW	NE	Non-saline soil
-S6	IW	NE	Non-saline soil
-S7	IW	NE	Non-saline soil
-S9	IW	NE	Non-saline soil
-S10	IW	NE	Non-saline soil
-S11	IW	NE	Non-saline soil
-S12	IW	NE	Non-saline soil
-S13	IW	NE	Non-saline soil
-S15	IW	NW	Non-saline soil
-S16	IW	NW	Non-saline soil
-S17	IW	NW	Non-saline soil
-S18	IW	NW	Non-saline soil
-S19	IW	NW	Non-saline soil
-S20	IW	NW	Non-saline soil
-S22	IW	NE	Non-saline soil
-S23	IW	NE	Non-saline soil
-S24	IW	NE	Non-saline soil
-S25	IW	NE	Non-saline soil
-S26	IW	NE	Non-saline soil
-S27	IW	NE	Non-saline soil
-S28	IW	NE	Non-saline soil
-S30	IW	NE	Non-saline soil
-S34	IW	NE	Non-saline soil
-S35	IW	NE	Non-saline soil
-S36	IW	NE	Non-saline soil
-S37	IW	NE	Non-saline soil
-S61	CW	NC	Saline soil
-S62	CW	NC	Saline soil
-S63	CW	NC	Saline soil
-S65	CW	NC	Saline soil
-S85	CW	NC	Saline soil
-S86	CW	NC	Saline soil
-S87	CW	NC	Saline soil
-S88	CW	NC	Saline soil
-S89	CW	NC	Saline soil
-S112	CW	YML	Saline soil
-S113	CW	YML	Saline soil
-S114	CW	YML	Saline soil
-S161	CW	SC	Saline soil
-S162	CW	SC	Saline soil
-S164	CW	SC	Saline soil
-S165	CW	SC	Saline soil
-S166	CW	SC	Saline soil
-S167	CW	SC	Saline soil
-S168	CW	SC	Saline soil
-S169	CW	SC	Saline soil
-S170	CW	SC	Saline soil
-S171	CW	SC	Saline soil
-S172	CW	SC	Saline soil
-S173	CW	SC	Saline soil
-S174	CW	SC	Saline soil
-S175	CW	SC	Saline soil
-S176	CW	SC	Saline soil
-S177	CW	SC	Saline soil
-S179	CW	SC	Saline soil
-S182	CW	SC	Saline soil
-S187	TW	QTP	Saline soil
-S188	TW	QTP	Saline soil
-S191	TW	QTP	Saline soil
-S194	TW	QTP	Saline soil
-S196	TW	QTP	Saline soil
-S197	TW	QTP	Saline soil
-S198	TW	QTP	Saline soil
-S201	TW	QTP	Saline soil
-S202	TW	QTP	Saline soil
-S203	TW	QTP	Saline soil
-S204	TW	QTP	Saline soil
-S205	TW	QTP	Saline soil
-S206	TW	QTP	Saline soil
-S207	TW	QTP	Saline soil
-S208	TW	QTP	Saline soil
-S209	TW	QTP	Saline soil
-S210	TW	QTP	Saline soil
-S213	TW	QTP	Saline soil
-S214	TW	QTP	Saline soil
-S215	TW	QTP	Saline soil
-S216	TW	QTP	Saline soil
-S217	TW	QTP	Saline soil
-S218	TW	QTP	Saline soil
-S219	TW	QTP	Saline soil
-S220	TW	QTP	Saline soil
-S221	TW	QTP	Saline soil
-S222	TW	QTP	Saline soil
-S223	TW	QTP	Saline soil
-S224	TW	QTP	Saline soil
-S225	TW	QTP	Saline soil
+SampleID	Saline
+S1	Non-saline soil
+S2	Non-saline soil
+S3	Non-saline soil
+S4	Non-saline soil
+S5	Non-saline soil
+S6	Non-saline soil
+S7	Non-saline soil
+S9	Non-saline soil
+S10	Non-saline soil
+S11	Non-saline soil
+S12	Non-saline soil
+S13	Non-saline soil
+S15	Non-saline soil
+S16	Non-saline soil
+S17	Non-saline soil
+S18	Non-saline soil
+S19	Non-saline soil
+S20	Non-saline soil
+S22	Non-saline soil
+S23	Non-saline soil
+S24	Non-saline soil
+S25	Non-saline soil
+S26	Non-saline soil
+S27	Non-saline soil
+S28	Non-saline soil
+S30	Non-saline soil
+S34	Non-saline soil
+S35	Non-saline soil
+S36	Non-saline soil
+S37	Non-saline soil
+S61	Saline soil
+S62	Saline soil
+S63	Saline soil
+S65	Saline soil
+S85	Saline soil
+S86	Saline soil
+S87	Saline soil
+S88	Saline soil
+S89	Saline soil
+S112	Saline soil
+S113	Saline soil
+S114	Saline soil
+S161	Saline soil
+S162	Saline soil
+S164	Saline soil
+S165	Saline soil
+S166	Saline soil
+S167	Saline soil
+S168	Saline soil
+S169	Saline soil
+S170	Saline soil
+S171	Saline soil
+S172	Saline soil
+S173	Saline soil
+S174	Saline soil
+S175	Saline soil
+S176	Saline soil
+S177	Saline soil
+S179	Saline soil
+S182	Saline soil
+S187	Saline soil
+S188	Saline soil
+S191	Saline soil
+S194	Saline soil
+S196	Saline soil
+S197	Saline soil
+S198	Saline soil
+S201	Saline soil
+S202	Saline soil
+S203	Saline soil
+S204	Saline soil
+S205	Saline soil
+S206	Saline soil
+S207	Saline soil
+S208	Saline soil
+S209	Saline soil
+S210	Saline soil
+S213	Saline soil
+S214	Saline soil
+S215	Saline soil
+S216	Saline soil
+S217	Saline soil
+S218	Saline soil
+S219	Saline soil
+S220	Saline soil
+S221	Saline soil
+S222	Saline soil
+S223	Saline soil
+S224	Saline soil
+S225	Saline soil
