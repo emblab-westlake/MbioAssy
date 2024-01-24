@@ -771,7 +771,7 @@ RMT_cutoff <- function(matrix.cor){
 
 ## Notice: when the figure appears in Plots window, please click "ESC" on the keyboard twice. This will not affect the following analysis ##
 pattern <- co_occurrence_network(
-  matrix = table, p.cutoff = 0.05)  # cutoffs for correlation coefficient and P-value
+  matrix = t(table), p.cutoff = 0.05)  # cutoffs for correlation coefficient and P-value
 pattern$cor.cutoff
 View(pattern$matrix.cor1)
 
