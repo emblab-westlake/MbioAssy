@@ -12,7 +12,7 @@ e=44680  #number of edges
   
 #generate 1000 random networks
 for (i in 1:1000) {
-  g <- erdos.renyi.game(n, e,'gnm',weight=T,mode="undirected")
+  g <- erdos.renyi.game(n, e,'gnm')
   
   # Global toplogical features
   c <- cluster_walktrap(g)
