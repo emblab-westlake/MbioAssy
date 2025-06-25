@@ -55,7 +55,7 @@ co_occurrence_network <-
   matrix.cor1<-matrix.cor1[,which(colSums(matrix.cor1)!=0)]
   
   # generate graph using igraph
-  g1<-graph.adjacency(matrix.cor1,weight=T,mode="undirected")
+  g1<-graph_from_adjacency_matrix(matrix.cor1,weight=T,mode="undirected")
   g1<-simplify(g1)
   V(g1)$label <- V(g1)$name
   V(g1)$degree <- degree(g1)
@@ -107,7 +107,7 @@ pattern <- co_occurrence_network(
 pattern$cor.cutoff
 View(pattern$matrix.cor1)
 
-write.graph(pattern$graph1,'Network.gml',format='gml')    #network file for positive association
+write_graph(pattern$graph1,'Network.gml',format='gml')    #network file for positive association
 
 # Calculating network topological properties
 g<-pattern$graph1   ###positive network
@@ -117,8 +117,8 @@ modularity(c)
 md <- modularity(g, membership(c), weights = NULL)
 cc <- transitivity(g, vids = NULL,
                    weights = NULL)
-spl <- average.path.length(g, directed=FALSE, unconnected=TRUE)
-gd  <- graph.density(g, loops=FALSE)
+spl <- mean_distance(g, directed=FALSE, unconnected=TRUE)
+gd  <- edge_density(g, loops=FALSE)
 nd  <- diameter(g, directed = FALSE, unconnected = TRUE, weights = NA)
 node.degree <- degree(g, v = V(g), mode="all")
 ad  <- mean(node.degree)
@@ -130,7 +130,7 @@ write.csv(global.topology, file="Network.global.topology.csv")
 # Node toplogical features
 betweenness.centrality <- betweenness(g, v=V(g), 
                                       directed = FALSE, weights = NA,
-                                      nobigint = TRUE, normalized = FALSE)
+                                      normalized = FALSE)
 closeness.centrality <- closeness(g, vids = V(g),
                                   weights = NA, normalized = FALSE)
 node.transitivity <- transitivity(g, type = c("local"), vids = NULL,
